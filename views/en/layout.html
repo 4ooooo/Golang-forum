@@ -1,0 +1,93 @@
+{{ define "layout" }}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>X</title>
+	<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/static/css/font-awesome.min.css" rel="stylesheet">
+	<style>
+		/* Custom CSS for the sidebar */
+		.sidebar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 250px;
+			height: 100%;
+			background-color: #333;
+			padding-top: 20px;
+			color: #fff;
+		}
+
+		.sidebar ul {
+			padding-top: 50px;
+			/* Increase top padding to move categories down */
+		}
+
+		.sidebar a {
+			padding: 15px 15px;
+			text-align: center;
+			text-decoration: none;
+			color: #fff;
+			display: block;
+			margin-bottom: 15px;
+			font-size: 18px;
+		}
+
+		/* Style for link when hovered */
+		.sidebar a:hover {
+			background-color: #555;
+			color: black;
+			/* Link text turns black when hovered */
+		}
+
+		/* Custom CSS to move the content to the right */
+		.content-wrapper {
+			margin-left: 250px;
+		}
+	</style>
+</head>
+
+<body>
+	{{ template "navbar" . }}
+
+	<div class="container">
+		<div class="row">
+			<!-- Sidebar -->
+			<nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
+				<div class="position-sticky">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link" href="/sci">sci论文</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/xinde">科研心得</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/meeting">国际会议</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/chihe">吃喝玩乐</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<!-- Content Wrapper with Right Margin -->
+			<div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content-wrapper">
+				{{ template "content" . }}
+			</div>
+		</div>
+	</div>
+
+	<script src="/static/js/jquery-2.1.1.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+{{ end }}

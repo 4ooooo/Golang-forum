@@ -1,0 +1,35 @@
+{{ define "content" }}
+	<style>
+		.text-limit{
+			max-width: 90%;
+			word-wrap: break-word;
+    		word-break:normal;
+    		display: inline-block;
+    		white-space: pre-wrap;
+		}
+	</style>
+	<H3>吃喝玩乐板块</H3>
+	<p class="lead">
+		<a href="/thread/new">发布新帖</a> 
+	</p>
+    {{ range . }}
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="lead text-limit"> <i class="fa fa-comment-o"></i> {{ .Topic }}</span>
+				<form class="pull-right" action="/like" method="POST">
+					<input type="num" name="id" value="{{.Id}}" readonly style="display: none;">
+					<button class="fa fa-heart-o"></button>
+					<span>{{ .Num }}</span>
+				</form>
+			</div>
+			<div class="panel-body">
+				由 {{ .User.Name }} 发布于 {{ .CreatedAt | fdate }} - 已有 {{ .NumReplies }} 条回复。
+				
+				<div class="pull-right">
+					<a href="/thread/read?id={{.Uuid }}">阅读更多</a>
+				</div>
+			</div>
+		</div>
+    {{ end }}
+
+{{ end }}

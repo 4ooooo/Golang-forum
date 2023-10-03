@@ -1,0 +1,11 @@
+.text-limit {
+  max-width: 90%;
+  display: inline-block;
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-limit::after {
+  content: "\00a0"; /* Add a non-breaking space to prevent the last word from being cut off */
+}

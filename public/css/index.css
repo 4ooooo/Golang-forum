@@ -1,0 +1,7 @@
+.text-limit {
+/**/
+    word-wrap: break-word;
+    word-break:normal;
+    overflow: scroll;
+}
+

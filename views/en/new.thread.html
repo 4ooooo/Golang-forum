@@ -1,0 +1,17 @@
+{{ define "content" }}
+
+	<form role="form" action="/thread/create" method="post">
+		<div class="lead">内容</div>
+		<div class="form-group">
+			<textarea class="form-control" name="topic" id="topic" placeholder="Thread topic here" rows="4"></textarea>
+			<input type="radio" value="sci" name="classification">SCI论文
+        	<input type="radio" value="xinde" name="classification">科研心得
+        	<input type="radio" value="meeting" name="classification">国际会议
+        	<input type="radio" value="joy" name="classification">吃喝玩乐
+			<br/>
+			<br/>
+			<button class="btn btn-lg btn-primary pull-right" type="submit">立即发布</button>
+		</div>
+	</form>
+
+{{ end }}

@@ -1,0 +1,76 @@
+{{ define "content" }}
+	<p class="lead">
+		<a href="/thread/new">发布新帖</a> 
+	</p>
+	<link href="/static/css/index.css" rel="stylesheet">
+	<style>
+    .text1{
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	    overflow: hidden;
+	    display:block;}
+	    
+   .text2{       
+        width: 800px;
+        word-break: break-all;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        /** 对象作为伸缩盒子模型显示 **/
+        -webkit-box-orient: vertical;
+        /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+        -webkit-line-clamp: 1;
+        /** 显示的行数 **/
+        overflow: hidden;
+        /** 隐藏超出的内容 **/
+        word-wrap:break-word;
+        /*英文强制换行*/      
+     }
+ </style>
+    {{ range . }}
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="lead text2"> <i class="fa fa-comment-o"></i> {{ .Topic }}</span>
+				
+			</div>
+
+			<div class="panel-body">
+				<form class="pull-right" action="/like" method="POST">
+					<input type="num" name="id" value="{{.Id}}" readonly style="display: none;">
+					<button class="fa fa-heart-o"></button>
+					<span>{{ .Num }}</span>
+				</form>
+				由 {{ .User.Name }} 发布于 {{ .CreatedAt | fdate }} - 已有 {{ .NumReplies }} 条回复。
+				
+				<div class="pull-right">
+					<a href="/thread/read?id={{.Uuid }}">阅读更多</a>
+				</div>
+			</div>
+		</div>
+    {{ end }}
+
+{{ end }}
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+ <script>
+ // 中间显示省略号，截取显示括号内容
+var str = $(".text").text();
+var last = 0;
+var all = str.length;
+var fisrt = str.substring(0,6);
+// 没有中文括号（
+if (str.lastIndexOf('（') == -1) {
+    // 也没有英文括号(
+    if (str.lastIndexOf('(') == -1) {
+        last = all - 5;
+    }else{
+        // 有英文括号(，就从英文括号开始截取
+        last = str.lastIndexOf('(');
+    }
+}else{
+    last = str.lastIndexOf('（');
+}
+// 如果长度大于13个字符才显示省略号
+if (all > 16) {
+    $(".text").text(fisrt+" ... "+str.substring(last,all));
+}
+ </script>
